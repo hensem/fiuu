@@ -1,5 +1,7 @@
 Contain Docker image that is ready to be use in Docker container
 
+In the case if MySQL does not start, or data is corrupted (normal issue when copying between machine), use mysql_dump.sql to restore data on an empty, clean db container.
+
 Application Bulk Submission to Channel Partner
 
 To submit multiple applications at once
