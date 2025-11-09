@@ -1,0 +1,32 @@
+# =====================================
+# 🐳 DOCKER & MYSQL
+# =====================================
+docker/mysql_data/
+docker/mysql_backup/
+*.sock
+*.pid
+*.cnf
+*.ibd
+*.ib_logfile*
+
+# =====================================
+# ⚙️ LARAVEL BACKEND
+# =====================================
+docker/src/vendor/
+docker/src/node_modules/
+docker/src/storage/
+docker/src/bootstrap/cache/
+docker/src/.env
+docker/src/.env.backup
+
+# =====================================
+# 💻 SYSTEM / EDITOR / LOGS
+# =====================================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
