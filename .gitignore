@@ -1,13 +1,16 @@
 # =====================================
 # 🐳 DOCKER & MYSQL
 # =====================================
-docker/mysql_data/
-docker/mysql_backup/
+docker/mysql_data/      # ignore MySQL runtime data only
 *.sock
 *.pid
 *.cnf
 *.ibd
 *.ib_logfile*
+
+# ✅ Keep backups (versioned .sql files)
+!docker/mysql_backup/
+!docker/mysql_backup/*.sql
 
 # =====================================
 # ⚙️ LARAVEL BACKEND
