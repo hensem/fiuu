@@ -1,0 +1,17 @@
+# Ignore MySQL runtime files
+mysql_data/
+mysql_backup/
+
+# Ignore Laravel cache, vendor, and node modules
+src/vendor/
+src/node_modules/
+src/public/build/
+
+# Ignore Git and editor configs
+.git/
+.gitignore
+.vscode/
+.DS_Store
+
+# Ignore PowerShell scripts during build
+setup.ps1
