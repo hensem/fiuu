@@ -19,8 +19,6 @@ docker/src/vendor/
 docker/src/node_modules/
 docker/src/storage/
 docker/src/bootstrap/cache/
-docker/src/.env
-docker/src/.env.backup
 
 # =====================================
 # 💻 SYSTEM / EDITOR / LOGS

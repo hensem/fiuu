@@ -1,33 +1,37 @@
+# ===============================================
+# 🧩 PHP + Composer + Node.js for Laravel + Vite
+# ===============================================
 FROM php:8.2-fpm
 
-# Install dependencies
-RUN docker-php-ext-install pdo pdo_mysql
-
-# Disable PHP OPcache in development
-RUN echo "opcache.enable=0" > /usr/local/etc/php/conf.d/opcache-dev.ini \
- && echo "opcache.validate_timestamps=1" >> /usr/local/etc/php/conf.d/opcache-dev.ini \
- && echo "opcache.revalidate_freq=0" >> /usr/local/etc/php/conf.d/opcache-dev.ini
-
-
+# --- Install system dependencies and PHP extensions ---
 RUN apt-get update && apt-get install -y \
+    git \
+    unzip \
+    zip \
     curl \
     gnupg \
     ca-certificates \
-    bash
+    bash \
+    && docker-php-ext-install pdo pdo_mysql
 
-# Add NodeSource repository & install Node.js v20 (LTS)
+# --- Install Composer globally ---
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# --- Install Node.js (v20 LTS) ---
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs \
     && npm install -g npm@latest
 
-# Clean up
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+# --- Disable OPcache in dev mode (optional) ---
+RUN echo "opcache.enable=0" > /usr/local/etc/php/conf.d/opcache-dev.ini \
+ && echo "opcache.validate_timestamps=1" >> /usr/local/etc/php/conf.d/opcache-dev.ini \
+ && echo "opcache.revalidate_freq=0" >> /usr/local/etc/php/conf.d/opcache-dev.ini
 
-
+# --- Set working directory ---
 WORKDIR /var/www/html
 
-# Copy existing application folder contents
+# --- Copy app source code ---
 COPY . /var/www/html
 
-# No chmod/chown (Windows-safe)
-CMD php-fpm
+# --- Default command ---
+CMD ["php-fpm"]
