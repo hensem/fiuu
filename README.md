@@ -48,7 +48,7 @@ cmd /c "docker exec -i laravel_db mysql -u root -proot laravel < ..\mysql_dump.s
 ```
 
 If there’s any error, it’s likely because MySQL initialization just completed but hasn’t yet switched to “running mode.”  
-Wait a few more seconds and try again.
+Wait a few more minutes and try again.
 
 To check MySQL status:
 
@@ -205,5 +205,5 @@ Look for:
 
 ---
 
-Author: [@hensem](https://github.com/hensem)  
+Author: [@ahmad kamal sulong](https://github.com/hensem)  
 License: Private / Internal Project
