@@ -102,9 +102,11 @@ Illuminate\Foundation\ViteManifestNotFoundException
 
 ---
 
-### 7. Clear cache and fix permissions
+### 7. Create the cache table, Clear cache and fix permissions
 
 ```
+php artisan cache:table
+php artisan migrate
 php artisan config:clear
 php artisan cache:clear
 chown -R www-data:www-data storage bootstrap/cache
