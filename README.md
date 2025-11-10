@@ -30,7 +30,7 @@ docker compose up -d
 
 ---
 
-### 3. Recreate the MySQL volume (optional clean setup)
+### 3. Recreate the MySQL volume
 
 ```
 docker compose down -v
