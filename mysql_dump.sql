@@ -11,7 +11,7 @@
  Target Server Version : 80044
  File Encoding         : 65001
 
- Date: 10/11/2025 04:49:42
+ Date: 10/11/2025 09:20:41
 */
 
 SET NAMES utf8mb4;
@@ -32,7 +32,7 @@ CREATE TABLE `api_tokens`  (
   UNIQUE INDEX `token`(`token`) USING BTREE,
   INDEX `user_id_idx`(`user_id`) USING BTREE,
   CONSTRAINT `api_tokens_user_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of api_tokens
@@ -56,7 +56,7 @@ CREATE TABLE `application_attachments`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `application_attach`(`application`) USING BTREE,
   CONSTRAINT `application_attach` FOREIGN KEY (`application`) REFERENCES `applications` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of application_attachments
@@ -78,7 +78,7 @@ CREATE TABLE `application_status`  (
   `id` tinyint UNSIGNED NOT NULL AUTO_INCREMENT,
   `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of application_status
@@ -110,7 +110,7 @@ CREATE TABLE `applications`  (
   CONSTRAINT `app_status` FOREIGN KEY (`status`) REFERENCES `application_status` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `app_submission` FOREIGN KEY (`submission`) REFERENCES `submissions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `app_updated_by` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of applications
@@ -124,6 +124,21 @@ INSERT INTO `applications` VALUES (6, 4, 'HRDF Training Grant', 5, '2025-11-09 0
 INSERT INTO `applications` VALUES (7, 4, 'Pakej Awani', 6, '2025-11-09 07:53:36', 2, 5, '2025-11-09 09:31:40', NULL);
 INSERT INTO `applications` VALUES (8, 3, 'Loan Application - SME Expansion 2025', 5, '2025-11-09 10:18:10', 2, 5, '2025-11-09 10:21:17', 'Client requested higher credit limit; pending review of business documents.');
 INSERT INTO `applications` VALUES (9, NULL, 'E-commerce Website Development', 5, '2025-11-09 10:59:22', 1, 5, '2025-11-09 10:59:22', 'Developed a scalable, responsive e-commerce website using React and Node.js. Optimized the user interface and backend processes, which increased website traffic by 40% and boosted online sales by 30% within the first three months post-launch.');
+
+-- ----------------------------
+-- Table structure for cache
+-- ----------------------------
+DROP TABLE IF EXISTS `cache`;
+CREATE TABLE `cache`  (
+  `key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `expiration` int UNSIGNED NOT NULL,
+  PRIMARY KEY (`key`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of cache
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for logs
@@ -142,7 +157,7 @@ CREATE TABLE `logs`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `log_user`(`user`) USING BTREE,
   CONSTRAINT `log_user` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 49 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 215 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of logs
@@ -363,6 +378,21 @@ INSERT INTO `logs` VALUES (213, 'UserController', 'store', 'users', 'updated_at'
 INSERT INTO `logs` VALUES (214, 'UserController', 'store', 'users', 'id', NULL, '8', 5, '2025-11-09 11:56:59');
 
 -- ----------------------------
+-- Table structure for migrations
+-- ----------------------------
+DROP TABLE IF EXISTS `migrations`;
+CREATE TABLE `migrations`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of migrations
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for partner_status
 -- ----------------------------
 DROP TABLE IF EXISTS `partner_status`;
@@ -370,7 +400,7 @@ CREATE TABLE `partner_status`  (
   `id` tinyint UNSIGNED NOT NULL AUTO_INCREMENT,
   `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of partner_status
@@ -405,7 +435,7 @@ CREATE TABLE `partners`  (
   CONSTRAINT `partner_created_by` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `partner_status` FOREIGN KEY (`status`) REFERENCES `partner_status` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `partner_updated_by` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of partners
@@ -423,7 +453,7 @@ CREATE TABLE `submission_status`  (
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of submission_status
@@ -453,7 +483,7 @@ CREATE TABLE `submissions`  (
   CONSTRAINT `submit_partner` FOREIGN KEY (`partner`) REFERENCES `partners` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `submitted_by` FOREIGN KEY (`submitted_by`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `user_submit` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of submissions
@@ -485,7 +515,7 @@ CREATE TABLE `users`  (
   CONSTRAINT `user_created_by` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `user_update_by` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `users_role` FOREIGN KEY (`role`) REFERENCES `users_role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of users
@@ -506,7 +536,7 @@ CREATE TABLE `users_role`  (
   `created_by` bigint UNSIGNED NULL DEFAULT NULL,
   `created_on` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of users_role
